@@ -11,6 +11,8 @@ class Main():
     def start(self):
         self.rgb_led.start_rgb_led_thread()
     
+    def stop(self):
+        self.rgb_led.stop()
 
 
 if __name__ == "__main__":
@@ -22,3 +24,4 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         print("Interrupted")
+        main.stop()

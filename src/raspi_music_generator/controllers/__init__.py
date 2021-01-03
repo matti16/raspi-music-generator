@@ -15,3 +15,6 @@ class RGBLedController():
     def start_rgb_led_thread(self):
         self.rgb_led_thread = threading.Thread(target=self._rgb_loop)
         self.rgb_led_thread.start()
+    
+    def stop(self):
+        self.rgb_led.destroy()
