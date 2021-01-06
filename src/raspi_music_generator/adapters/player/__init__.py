@@ -15,16 +15,16 @@ class Player():
     
     
     def play(self):
-        current = 0
+        current_track = 0
         self._refresh_song_list()
-        pygame.mixer.music.load(self.songs[current])
+        pygame.mixer.music.load(self.songs[current_track])
         pygame.mixer.music.play()
-        print("Play: ", self.songs[current])
+        print("Play: ", self.songs[current_track])
         pygame.mixer.music.set_endevent(self.next) 
 
         self._refresh_song_list()
         if len(self.songs) > 1:
-            pygame.mixer.music.queue(self.songs[current + 1])
+            pygame.mixer.music.queue(self.songs[current_track + 1])
 
         running = True
         while running:
