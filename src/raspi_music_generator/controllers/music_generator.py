@@ -17,16 +17,15 @@ tf.disable_v2_behavior()
 
 from raspi_music_generator.settings import MusicGeneratorSettings
 from raspi_music_generator.adapters.button import Button
-from raspi_music_generator.adapters.rgb_led import RGBLed
 from raspi_music_generator.adapters.player import Player
 
 
 class MusicGenerator():
 
-    def __init__(self):
+    def __init__(self, led):
         self.button = Button()
         self.player = Player(MusicGeneratorSettings.output_dir)
-        self.led = RGBLed()
+        self.led = led
 
         bundle_file = os.path.expanduser(MusicGeneratorSettings.bundle_file)
         bundle = sequence_generator_bundle.read_bundle_file(bundle_file)

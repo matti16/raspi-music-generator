@@ -8,7 +8,7 @@ class Main():
 
     def __init__(self):
         self.rgb_led = RGBLedController()
-        self.music_generator = MusicGenerator()
+        self.music_generator = MusicGenerator(self.rgb_led)
     
     def start(self):
         self.rgb_led.start_rgb_led_thread()
