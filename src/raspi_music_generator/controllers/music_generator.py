@@ -2,6 +2,7 @@ import ast
 import os
 import time
 import threading
+import random
 
 from magenta.models.polyphony_rnn import polyphony_model
 from magenta.models.polyphony_rnn import polyphony_sequence_generator
@@ -25,6 +26,7 @@ class MusicGenerator():
     def __init__(self):
         self.button = Button()
         self.player = Player(MusicGeneratorSettings.output_dir)
+        self.led = RGBLed()
 
         bundle_file = os.path.expanduser(MusicGeneratorSettings.bundle_file)
         bundle = sequence_generator_bundle.read_bundle_file(bundle_file)
@@ -49,12 +51,28 @@ class MusicGenerator():
             )
 
 
-    def run(self, primer_melody="[60, -2, 60, -2, 67, -2, 67, -2]"):
+    def _get_note_from_perc(self, x):
+        return int(x / 100 * (MusicGeneratorSettings.max_note - MusicGeneratorSettings.min_note) + MusicGeneratorSettings.min_note)
+
+    def _get_primer_melody(self):
+        r, g, b = self.led.read_values()
+        r_note, g_note, b_note = self._get_note_from_perc(r), self._get_note_from_perc(g), self._get_note_from_perc(b)
+        primer = []
+        for n in [r_note, g_note, b_note]:
+            primer.append(n)
+            for _ in range(random.randint(1, 4)):
+                primer.append(-2)
+        return str(primer)
+
+
+    def run(self):
         """Generates polyphonic tracks and saves them as MIDI files.
         Uses the options specified by the flags defined in this module.
         Args:
             generator: The PolyphonyRnnSequenceGenerator to use for generation.
         """
+        primer_melody = self._get_primer_melody()
+
         output_dir = os.path.expanduser(MusicGeneratorSettings.output_dir)
 
         if not tf.gfile.Exists(output_dir):
