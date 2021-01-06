@@ -19,7 +19,7 @@ class MusicGeneratorSettings(object):
     beam_size = 1
     condition_on_primer = True
     inject_primer_during_generation = True
-    num_steps = 250
+    num_steps = 200
     num_outputs = 1
     output_dir = "/tmp/polyphony_rnn/generated"
     config = "polyphony"
