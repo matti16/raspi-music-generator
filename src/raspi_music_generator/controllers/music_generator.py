@@ -119,6 +119,8 @@ class MusicGenerator():
             
             if i == 0:
                 threading.Thread(target=self.player.play).start()
+            elif i == 1:
+                self.player.enqueue(midi_path)
 
         tf.logging.info('Wrote %d MIDI files to %s',
                         MusicGeneratorSettings.num_outputs, output_dir)    
