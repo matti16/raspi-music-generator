@@ -23,6 +23,5 @@ class MusicGeneratorSettings(object):
     num_outputs = 1
     output_dir = "/tmp/polyphony_rnn/generated"
     config = "polyphony"
-    save_generator_bundle = False
-    bundle_file = ""
+    bundle_file = "/home/pi/resources/polyphony_rnn.mag"
     hparams = ""
