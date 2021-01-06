@@ -1,5 +1,6 @@
 import time
 import threading
+import RPi.GPIO as GPIO
 
 from raspi_music_generator.controllers import RGBLedController
 from raspi_music_generator.controllers.music_generator import MusicGenerator
@@ -7,6 +8,7 @@ from raspi_music_generator.controllers.music_generator import MusicGenerator
 class Main():
 
     def __init__(self):
+        GPIO.cleanup()
         self.rgb_led = RGBLedController()
         self.music_generator = MusicGenerator(self.rgb_led)
     
