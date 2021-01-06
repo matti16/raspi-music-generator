@@ -12,7 +12,7 @@ class Player():
         current = 0
         songs = [os.path.join(self.folder, i) for i in sorted(os.listdir(self.folder))]
         pygame.mixer.music.load(songs[current])
-        pygame.mixer.play()
+        pygame.mixer.music.play()
         pygame.mixer.music.set_endevent(self.next_event) 
 
         running = True
