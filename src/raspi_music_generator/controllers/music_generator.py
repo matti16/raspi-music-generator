@@ -125,8 +125,8 @@ class MusicGenerator():
 
     
     def _button_listener(self):
+        playing = False
         while True:
-            playing = False
             if self.button.read_button():
                 if not playing:
                     self.run()
