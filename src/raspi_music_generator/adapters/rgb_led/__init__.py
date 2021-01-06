@@ -20,14 +20,18 @@ class RGBLed():
         self.p_Blue.start(0)
     
 
-    def update_color(self): 
-        value_Red = self.adc.analogRead(RGBLedSettings.adc_R)       # read ADC value of 3 potentiometers
-        value_Green = self.adc.analogRead(RGBLedSettings.adc_G)
-        value_Blue = self.adc.analogRead(RGBLedSettings.adc_B)
+    def read_values(self):
+        value_Red = self.adc.analogRead(RGBLedSettings.adc_R) * 100 / 255
+        value_Green = self.adc.analogRead(RGBLedSettings.adc_G) * 100 / 255
+        value_Blue = self.adc.analogRead(RGBLedSettings.adc_B) * 100 / 255
+        return value_Red, value_Green, value_Blue
 
-        self.p_Red.ChangeDutyCycle(value_Red*100/255)  # map the read value of potentiometers into PWM value and output it 
-        self.p_Green.ChangeDutyCycle(value_Green*100/255)
-        self.p_Blue.ChangeDutyCycle(value_Blue*100/255)
+
+    def update_color(self): 
+        value_Red, value_Green, value_Blue = self.read_values()
+        self.p_Red.ChangeDutyCycle(value_Red)  # map the read value of potentiometers into PWM value and output it 
+        self.p_Green.ChangeDutyCycle(value_Green)
+        self.p_Blue.ChangeDutyCycle(value_Blue)
 
 
     def destroy(self):

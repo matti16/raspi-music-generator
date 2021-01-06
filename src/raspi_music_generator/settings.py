@@ -6,3 +6,23 @@ class RGBLedSettings(object):
     adc_R = 0
     adc_G = 1
     adc_B = 2
+
+class ButtonSettings(object):
+    pin = 12
+
+class MusicGeneratorSettings(object):
+    log = "WARN"
+    qpm = 120
+    steps_per_iteration = 1
+    temperature = 1.0
+    branch_factor = 1
+    beam_size = 1
+    condition_on_primer = True
+    inject_primer_during_generation = True
+    num_steps = 256
+    num_outputs = 1
+    output_dir = "/tmp/polyphony_rnn/generated"
+    config = "polyphony"
+    save_generator_bundle = False
+    bundle_file = ""
+    hparams = ""

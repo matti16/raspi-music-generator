@@ -2,14 +2,17 @@ import time
 import threading
 
 from raspi_music_generator.controllers import RGBLedController
+from raspi_music_generator.controllers.music_generator import MusicGenerator
 
 class Main():
 
     def __init__(self):
         self.rgb_led = RGBLedController()
+        self.music_generator = MusicGenerator()
     
     def start(self):
         self.rgb_led.start_rgb_led_thread()
+        self.music_generator.start_button_listener()
     
     def stop(self):
         self.rgb_led.stop()
