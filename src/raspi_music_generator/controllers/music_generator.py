@@ -97,7 +97,9 @@ class MusicGenerator():
             midi_filename = str(i + 1).zfill(digits) + ".mid"
             midi_path = os.path.join(output_dir, midi_filename)
             note_seq.sequence_proto_to_midi_file(generated_sequence, midi_path)
-            self.player.play()
+            
+            if i == 0:
+                threading.Thread(target=self.player.play).start()
 
         tf.logging.info('Wrote %d MIDI files to %s',
                         MusicGeneratorSettings.num_outputs, output_dir)    
@@ -105,8 +107,15 @@ class MusicGenerator():
     
     def _button_listener(self):
         while True:
+            playing = False
             if self.button.read_button():
-                self.run()
+                if not playing:
+                    self.run()
+                    playing = True
+                else:
+                    self.player.stop()
+                    playing = False
+
 
     def start_button_listener(self):
         self.button_thread = threading.Thread(target=self._button_listener)
