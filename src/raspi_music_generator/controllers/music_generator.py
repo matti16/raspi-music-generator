@@ -59,7 +59,9 @@ class MusicGenerator():
         primer = []
         for n in [r_note, g_note, b_note]:
             primer.append(n)
-            for _ in range(random.randint(1, 4)):
+            primer.append(-2)
+            for _ in range(random.randint(0, 3)):
+                primer.append(n)
                 primer.append(-2)
         return str(primer)
 
