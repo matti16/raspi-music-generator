@@ -25,5 +25,5 @@ class MusicGeneratorSettings(object):
     config = "polyphony"
     bundle_file = "/home/pi/resources/polyphony_rnn.mag"
     hparams = ""
-    max_note = 90
-    min_note = 40
+    max_note = 80
+    min_note = 50
