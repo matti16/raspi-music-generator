@@ -47,7 +47,7 @@ class MusicGenerator():
             )
 
 
-    def run(self, primer_melody=""):
+    def run(self, primer_melody="[60, -2, 60, -2, 67, -2, 67, -2]"):
         """Generates polyphonic tracks and saves them as MIDI files.
         Uses the options specified by the flags defined in this module.
         Args:
