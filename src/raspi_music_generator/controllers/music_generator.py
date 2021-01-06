@@ -58,9 +58,7 @@ class MusicGenerator():
         r_note, g_note, b_note = self._get_note_from_perc(r), self._get_note_from_perc(g), self._get_note_from_perc(b)
         primer = []
         for n in [r_note, g_note, b_note]:
-            primer.append(n)
-            primer.append(-2)
-            for _ in range(random.randint(0, 3)):
+            for _ in range(random.randint(1, 3)):
                 primer.append(n)
                 primer.append(-2)
         return str(primer)
