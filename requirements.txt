@@ -4,3 +4,4 @@ https://github.com/bitsy-ai/tensorflow-arm-bin/releases/download/v2.4.0-rc2/tens
 magenta
 RPi.GPIO
 smbus
+pygame

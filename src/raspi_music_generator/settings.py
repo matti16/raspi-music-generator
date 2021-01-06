@@ -11,7 +11,7 @@ class ButtonSettings(object):
     pin = 12
 
 class MusicGeneratorSettings(object):
-    log = "WARN"
+    log = "INFO"
     qpm = 120
     steps_per_iteration = 1
     temperature = 1.0
@@ -19,8 +19,8 @@ class MusicGeneratorSettings(object):
     beam_size = 1
     condition_on_primer = True
     inject_primer_during_generation = True
-    num_steps = 256
-    num_outputs = 1
+    num_steps = 128
+    num_outputs = 5
     output_dir = "/tmp/polyphony_rnn/generated"
     config = "polyphony"
     bundle_file = "/home/pi/resources/polyphony_rnn.mag"

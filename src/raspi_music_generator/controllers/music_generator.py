@@ -17,12 +17,14 @@ tf.disable_v2_behavior()
 from raspi_music_generator.settings import MusicGeneratorSettings
 from raspi_music_generator.adapters.button import Button
 from raspi_music_generator.adapters.rgb_led import RGBLed
+from raspi_music_generator.adapters.player import Player
 
 
 class MusicGenerator():
 
     def __init__(self):
         self.button = Button()
+        self.player = Player(MusicGeneratorSettings.output_dir)
 
         bundle_file = os.path.expanduser(MusicGeneratorSettings.bundle_file)
         bundle = sequence_generator_bundle.read_bundle_file(bundle_file)
@@ -57,6 +59,9 @@ class MusicGenerator():
 
         if not tf.gfile.Exists(output_dir):
             tf.gfile.MakeDirs(output_dir)
+        
+        for i in os.listdir(output_dir):
+            os.remove(os.path.join(output_dir, i))
 
         primer_sequence = None
         qpm = MusicGeneratorSettings.qpm 
@@ -86,13 +91,13 @@ class MusicGenerator():
 
         # Make the generate request num_outputs times and save the output as midi
         # files.
-        date_and_time = time.strftime('%Y-%m-%d_%H%M%S')
         digits = len(str(MusicGeneratorSettings.num_outputs))
         for i in range(MusicGeneratorSettings.num_outputs):
             generated_sequence = self.generator.generate(primer_sequence, generator_options)
-            midi_filename = '%s_%s.mid' % (date_and_time, str(i + 1).zfill(digits))
+            midi_filename = str(i + 1).zfill(digits) + ".mid"
             midi_path = os.path.join(output_dir, midi_filename)
             note_seq.sequence_proto_to_midi_file(generated_sequence, midi_path)
+            self.player.play()
 
         tf.logging.info('Wrote %d MIDI files to %s',
                         MusicGeneratorSettings.num_outputs, output_dir)    
